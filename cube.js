@@ -12,31 +12,13 @@ function make3DArray(w,h,d){
 
 function RubikCube(res){
   this.res=res;
-  this.moveCount=0;
-	this.rsped=10;
-
+  //Set the rotation/animation speed
+  this.rsped=10;
+ //Initialize rotation modifier for turning faces either clockwise -> 1 or counterclockwise -> -1
   this.rMod=1;
 
-  this.uangle=0;
-  this.ucw=0;
-
-  this.dangle=0;
-  this.dcw=0;
-
-  this.rangle=0;
-  this.rcw=0;
-
-  this.langle=0;
-  this.lcw=0;
-
-  this.fangle=0;
-  this.fcw=0;
-
-  this.bangle=0;
-  this.bcw=0;
-
   //Initialize Rubik 3x3x3
-	this.grid = make3DArray(3,3,3);
+  this.grid = make3DArray(3,3,3);
   for(let k=0;k<3;k++){
   	for(let j=0;j<3;j++){
   		for(let i=0;i<3;i++){
@@ -45,143 +27,120 @@ function RubikCube(res){
   	}
   }
 
-	this.aReset=function(){
-		this.uangle=0;
-		this.dangle=0;
-		this.rangle=0;
-		this.langle=0;
-		this.fangle=0;
-		this.bangle=0;
-	}
 
-	this.cloneGrid=function(){
-		let gridtemp=make3DArray(3,3,3);
-		for(let k=0;k<3;k++){
-			for(let j=0;j<3;j++){
-				for(let i=0;i<3;i++){
-					gridtemp[i][j][k]=this.grid[i][j][k].clone();
-				}
-			}
-		}
-		return gridtemp;
-	}
-
-	this.scramble=function(){
-
-	}
-
-	this.display=function(is,ie,js,je,ks,ke){
-		for(let k=ks;k<ke;k++){
-			for(let j=js;j<je;j++){
-				for(let i=is;i<ie;i++){
-					push();
-					this.grid[i][j][k].show();
-					pop();
-				}
-			}
-		}
-	}
+ this.cloneGrid=function(){
+ 	 let gridtemp=make3DArray(3,3,3);
+ 	 for(let k=0;k<3;k++){
+		 for(let j=0;j<3;j++){
+			 for(let i=0;i<3;i++){
+				 gridtemp[i][j][k]=this.grid[i][j][k].clone();
+			 }
+		 }
+	 }
+	 return gridtemp;
+ }
+ //TODO
+ this.scramble=function(){
+ 
+ }
+ 
+//Displays cubies of the cube based on starting and ending values of i,j,k defined by is-ie, js-je, ks-ke 
+ this.display=function(is,ie,js,je,ks,ke){
+ 	 for(let k=ks;k<ke;k++){
+		 for(let j=js;j<je;j++){
+			 for(let i=is;i<ie;i++){
+				 push();
+				 this.grid[i][j][k].show();
+				 pop();
+			 }
+		 }
+	 }
+ }
 
   this.render=function(){
 
-		if (this.ucw!=0) {
-			this.aUp();
-			if (this.ucw==0) {
-				this.uUp();
-			}
+	if (this.ucw!=0) {
+		this.aUp();
+		if (this.ucw==0) {
+			this.uUp();
 		}
-		else if (this.dcw!=0) {
-			this.aDown();
-			if (this.dcw==0) {
-				this.uDown();
-			}
+	}
+	else if (this.dcw!=0) {
+		this.aDown();
+		if (this.dcw==0) {
+			this.uDown();
 		}
-    else if (this.fcw!=0) {
-    	this.aFront();
-      if (this.fcw==0) {
-				this.uFront();
-      }
-    }
-		else if (this.bcw!=0) {
-			this.aBack();
-			if (this.bcw==0) {
-				this.uBack();
-			}
+	}
+	else if (this.fcw!=0) {
+		this.aFront();
+		if (this.fcw==0) {
+			this.uFront();
 		}
-		else if (this.rcw!=0){
-			this.aRight();
-			if (this.rcw==0) {
-				this.uRight();
-			}
+	}
+	else if (this.bcw!=0) {
+		this.aBack();
+		if (this.bcw==0) {
+			this.uBack();
 		}
-		else if (this.lcw!=0){
-			this.aLeft();
-			if (this.lcw==0) {
-				this.uLeft();
-			}
+	}
+	else if (this.rcw!=0){
+		this.aRight();
+		if (this.rcw==0) {
+			this.uRight();
 		}
-
-    else {
-			this.aReset();
-      this.display(0,3,0,3,0,3);
-    }
-
-
+	}
+	else if (this.lcw!=0){
+		this.aLeft();
+		if (this.lcw==0) {
+			this.uLeft();
+		}
+	}
+	else {
+		this.display(0,3,0,3,0,3);
+	}
   }
 
 
   this.frontCW=function(){
     this.fcw+=this.rsped;
-    this.moveCount++;
   }
   this.frontCCW=function(){
     this.fcw-=this.rsped;
-    this.moveCount++;
   }
 
   this.upCW=function(){
     this.ucw+=this.rsped;
-    this.moveCount++;
   }
   this.upCCW=function(){
     this.ucw-=this.rsped;
-    this.moveCount++;
   }
 
   this.downCW=function(){
     this.dcw+=this.rsped;
-    this.moveCount++;
   }
   this.downCCW=function(){
     this.dcw-=this.rsped;
-    this.moveCount++;
   }
 
   this.rightCW=function(){
     this.rcw+=this.rsped;
-    this.moveCount++;
   }
   this.rightCCW=function(){
     this.rcw-=this.rsped;
-    this.moveCount++;
   }
 
   this.leftCW=function(){
     this.lcw+=this.rsped;
-    this.moveCount++;
   }
   this.leftCCW=function(){
     this.lcw-=this.rsped;
-    this.moveCount++;
   }
 
   this.backCW=function(){
     this.bcw+=this.rsped;
-    this.moveCount++;
   }
   this.backCCW=function(){
     this.bcw-=this.rsped;
-    this.moveCount++;
   }
 
 	//front
