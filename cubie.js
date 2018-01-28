@@ -1,4 +1,3 @@
-
 function cubie(res,i,j,k){
 
 	this.res=res;

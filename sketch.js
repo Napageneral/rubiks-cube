@@ -1,5 +1,5 @@
 //Set size of each cube
-let res=200;
+let res=80;
 //Initialize angle for rotation
 let angle =0;
 //Init magic angle
@@ -9,7 +9,7 @@ let rc;
 
 
 function setup() {
-	createCanvas(windowWidth,windowHeight,WEBGL);
+	createCanvas(800,800,WEBGL);
 	//Set Magic Angle
 	ma=atan(1/sqrt(2));
 	//Build the rubik's cube
@@ -19,7 +19,7 @@ function setup() {
 
 function draw() {
 	background(0,204,200);
-	
+
 	//Initialize starting view
 	rotateX(ma*.8);
 	rotateY(QUARTER_PI);
